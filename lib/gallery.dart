@@ -11,10 +11,18 @@ class Gallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Images'),
-        actions: <Widget>[
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
+        title: const Text(
+          'Images',
+          style: TextStyle(color: Colors.white),
+        ),
+        actions: [
           IconButton(
-            icon: const Icon(Icons.delete),
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.white54,
+            ),
             onPressed: () {
               onDelete();
               Navigator.of(context).pop();
@@ -22,8 +30,11 @@ class Gallery extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Image.file(image),
+      body: Container(
+        color: Colors.black,
+        child: Center(
+          child: Image.file(image),
+        ),
       ),
     );
   }

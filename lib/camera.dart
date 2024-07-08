@@ -1,3 +1,4 @@
+import 'package:camera/gallery.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -47,15 +48,24 @@ class _CameraState extends State<Camera> {
                 ),
                 itemCount: _images.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(34)),
-                    child: GestureDetector(
-                      onLongPress: () {
-                        _alert(_images[index], context);
-                      },
-                      child: Image.file(_images[index]),
-                    ),
+                  return GestureDetector(
+                    onLongPress: () {
+                      _alert(_images[index], context);
+                    },
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Gallery(
+                                    image: _images[index],
+                                    onDelete: () {
+                                      _deleteImage(_images[index]);
+                                    },
+                                  )));
+                    },
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.file(_images[index])),
                   );
                 },
               ),
